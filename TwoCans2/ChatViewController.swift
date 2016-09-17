@@ -19,6 +19,25 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableview: UITableView!
     
+    
+    @IBOutlet weak var drums: UIImageView!
+    @IBOutlet weak var elecGuitar: UIImageView!
+    @IBOutlet weak var keys: UIImageView!
+    @IBOutlet weak var piano: UIImageView!
+    @IBOutlet weak var click: UIImageView!
+    @IBOutlet weak var acoGuitar: UIImageView!
+    @IBOutlet weak var handUp: UIImageView!
+    @IBOutlet weak var handDown: UIImageView!
+    @IBOutlet weak var handLeft: UIImageView!
+    @IBOutlet weak var handRight: UIImageView!
+    
+     @IBOutlet weak var singleTapRecognizer: UITapGestureRecognizer!
+    
+    @IBOutlet weak var iconLabel: UILabel!
+    var caMoveIcons = false
+    
+    
+    
     var ref: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle!
     var messages = Array<FIRDataSnapshot>()
@@ -267,10 +286,12 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func hideTapped(sender: UIButton) {
         
-        if chatTextField.isFirstResponder()
-        {
-            chatTextField.resignFirstResponder()
-        }
+        caMoveIcons = !caMoveIcons
+        
+//        if chatTextField.isFirstResponder()
+//        {
+//            chatTextField.resignFirstResponder()
+//        }
         
     }
     
@@ -283,6 +304,33 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func keyboardWillHide(notification: NSNotification)
     {
         chattextFieldConstraint.constant = 8.0
+    }
+    
+    
+    @IBAction func iconPressed(sender: UITapGestureRecognizer)
+    {
+        let name = iconLabel.text
+        setTextFromIcon(name!)
+    }
+    
+    
+    @IBAction func handlePan(recognizer:UIPanGestureRecognizer)
+    {
+        if caMoveIcons
+        {
+        let translation = recognizer.translationInView(self.view)
+        if let view = recognizer.view {
+            view.center = CGPoint(x:view.center.x + translation.x,
+                                  y:view.center.y + translation.y)
+        }
+        recognizer.setTranslation(CGPointZero, inView: self.view)
+        }
+        
+    }
+    
+    func setTextFromIcon(name: String)
+    {
+        chatTextField.text = chatTextField.text! + name
     }
     
     

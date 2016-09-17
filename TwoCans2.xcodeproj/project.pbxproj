@@ -22,6 +22,10 @@
 		4A6087561D8DAC5400966916 /* piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087501D8DAC5400966916 /* piano.png */; };
 		4A6087571D8DAC5400966916 /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087511D8DAC5400966916 /* keyboard.png */; };
 		4A6087581D8DAC5400966916 /* drum.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087521D8DAC5400966916 /* drum.png */; };
+		4A60875D1D8DB01C00966916 /* Hand Down-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087591D8DB01C00966916 /* Hand Down-48.png */; };
+		4A60875E1D8DB01C00966916 /* Hand Left-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60875A1D8DB01C00966916 /* Hand Left-48.png */; };
+		4A60875F1D8DB01C00966916 /* Hand Right-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60875B1D8DB01C00966916 /* Hand Right-48.png */; };
+		4A6087601D8DB01C00966916 /* Hand Up-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60875C1D8DB01C00966916 /* Hand Up-48.png */; };
 		A26643D2D7DE5F29C9E315EE /* Pods_TwoCans2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3FC00B08CD60FC5C75A452 /* Pods_TwoCans2.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +48,10 @@
 		4A6087501D8DAC5400966916 /* piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano.png; sourceTree = "<group>"; };
 		4A6087511D8DAC5400966916 /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
 		4A6087521D8DAC5400966916 /* drum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drum.png; sourceTree = "<group>"; };
+		4A6087591D8DB01C00966916 /* Hand Down-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hand Down-48.png"; sourceTree = "<group>"; };
+		4A60875A1D8DB01C00966916 /* Hand Left-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hand Left-48.png"; sourceTree = "<group>"; };
+		4A60875B1D8DB01C00966916 /* Hand Right-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hand Right-48.png"; sourceTree = "<group>"; };
+		4A60875C1D8DB01C00966916 /* Hand Up-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hand Up-48.png"; sourceTree = "<group>"; };
 		CE3FC00B08CD60FC5C75A452 /* Pods_TwoCans2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwoCans2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE372E8390E2A5A32DE626F4 /* Pods-TwoCans2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoCans2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwoCans2/Pods-TwoCans2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +104,10 @@
 				4A6087411D8C6F0100966916 /* LoginViewController.swift */,
 				4A60872E1D8C68F600966916 /* Main.storyboard */,
 				4A6087341D8C68F600966916 /* Assets.xcassets */,
+				4A6087591D8DB01C00966916 /* Hand Down-48.png */,
+				4A60875A1D8DB01C00966916 /* Hand Left-48.png */,
+				4A60875B1D8DB01C00966916 /* Hand Right-48.png */,
+				4A60875C1D8DB01C00966916 /* Hand Up-48.png */,
 				4A60874D1D8DAC5400966916 /* electric-guitar.png */,
 				4A60874E1D8DAC5400966916 /* guitar.png */,
 				4A60874F1D8DAC5400966916 /* metronome.png */,
@@ -185,9 +197,13 @@
 				4A6087351D8C68F600966916 /* Assets.xcassets in Resources */,
 				4A6087561D8DAC5400966916 /* piano.png in Resources */,
 				4A6087551D8DAC5400966916 /* metronome.png in Resources */,
+				4A60875E1D8DB01C00966916 /* Hand Left-48.png in Resources */,
 				4A6087301D8C68F600966916 /* Main.storyboard in Resources */,
+				4A6087601D8DB01C00966916 /* Hand Up-48.png in Resources */,
 				4A6087531D8DAC5400966916 /* electric-guitar.png in Resources */,
+				4A60875F1D8DB01C00966916 /* Hand Right-48.png in Resources */,
 				4A6087541D8DAC5400966916 /* guitar.png in Resources */,
+				4A60875D1D8DB01C00966916 /* Hand Down-48.png in Resources */,
 				4A6087571D8DAC5400966916 /* keyboard.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
