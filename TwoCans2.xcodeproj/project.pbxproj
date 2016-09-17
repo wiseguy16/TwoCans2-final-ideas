@@ -8,22 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		4A60872B1D8C68F600966916 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60872A1D8C68F600966916 /* AppDelegate.swift */; };
-		4A60872D1D8C68F600966916 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60872C1D8C68F600966916 /* ViewController.swift */; };
 		4A6087301D8C68F600966916 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A60872E1D8C68F600966916 /* Main.storyboard */; };
 		4A6087331D8C68F600966916 /* TwoCans2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A6087311D8C68F600966916 /* TwoCans2.xcdatamodeld */; };
 		4A6087351D8C68F600966916 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087341D8C68F600966916 /* Assets.xcassets */; };
 		4A6087381D8C68F600966916 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087361D8C68F600966916 /* LaunchScreen.storyboard */; };
+		4A6087401D8C698A00966916 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A60873F1D8C698A00966916 /* GoogleService-Info.plist */; };
+		4A6087421D8C6F0100966916 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6087411D8C6F0100966916 /* LoginViewController.swift */; };
+		4A6087441D8C705000966916 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6087431D8C705000966916 /* ChatViewController.swift */; };
+		4A6087461D8C707E00966916 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6087451D8C707E00966916 /* AppState.swift */; };
+		4A6087531D8DAC5400966916 /* electric-guitar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60874D1D8DAC5400966916 /* electric-guitar.png */; };
+		4A6087541D8DAC5400966916 /* guitar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60874E1D8DAC5400966916 /* guitar.png */; };
+		4A6087551D8DAC5400966916 /* metronome.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60874F1D8DAC5400966916 /* metronome.png */; };
+		4A6087561D8DAC5400966916 /* piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087501D8DAC5400966916 /* piano.png */; };
+		4A6087571D8DAC5400966916 /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087511D8DAC5400966916 /* keyboard.png */; };
+		4A6087581D8DAC5400966916 /* drum.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087521D8DAC5400966916 /* drum.png */; };
+		A26643D2D7DE5F29C9E315EE /* Pods_TwoCans2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3FC00B08CD60FC5C75A452 /* Pods_TwoCans2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37E6911D9F26DC60055968F4 /* Pods-TwoCans2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoCans2.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwoCans2/Pods-TwoCans2.release.xcconfig"; sourceTree = "<group>"; };
 		4A6087271D8C68F600966916 /* TwoCans2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoCans2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A60872A1D8C68F600966916 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4A60872C1D8C68F600966916 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4A60872F1D8C68F600966916 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A6087321D8C68F600966916 /* TwoCans2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TwoCans2.xcdatamodel; sourceTree = "<group>"; };
 		4A6087341D8C68F600966916 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A6087371D8C68F600966916 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A6087391D8C68F600966916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A60873F1D8C698A00966916 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A6087411D8C6F0100966916 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4A6087431D8C705000966916 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		4A6087451D8C707E00966916 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		4A60874D1D8DAC5400966916 /* electric-guitar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "electric-guitar.png"; sourceTree = "<group>"; };
+		4A60874E1D8DAC5400966916 /* guitar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guitar.png; sourceTree = "<group>"; };
+		4A60874F1D8DAC5400966916 /* metronome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metronome.png; sourceTree = "<group>"; };
+		4A6087501D8DAC5400966916 /* piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano.png; sourceTree = "<group>"; };
+		4A6087511D8DAC5400966916 /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
+		4A6087521D8DAC5400966916 /* drum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drum.png; sourceTree = "<group>"; };
+		CE3FC00B08CD60FC5C75A452 /* Pods_TwoCans2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwoCans2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE372E8390E2A5A32DE626F4 /* Pods-TwoCans2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoCans2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwoCans2/Pods-TwoCans2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +53,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A26643D2D7DE5F29C9E315EE /* Pods_TwoCans2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		116D2BCDCCEA8D483B7AF2AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE3FC00B08CD60FC5C75A452 /* Pods_TwoCans2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4A60871E1D8C68F500966916 = {
 			isa = PBXGroup;
 			children = (
 				4A6087291D8C68F600966916 /* TwoCans2 */,
 				4A6087281D8C68F600966916 /* Products */,
+				4A60873F1D8C698A00966916 /* GoogleService-Info.plist */,
+				BBA563E50290D525B955B205 /* Pods */,
+				116D2BCDCCEA8D483B7AF2AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +91,31 @@
 			isa = PBXGroup;
 			children = (
 				4A60872A1D8C68F600966916 /* AppDelegate.swift */,
-				4A60872C1D8C68F600966916 /* ViewController.swift */,
+				4A6087451D8C707E00966916 /* AppState.swift */,
+				4A6087431D8C705000966916 /* ChatViewController.swift */,
+				4A6087411D8C6F0100966916 /* LoginViewController.swift */,
 				4A60872E1D8C68F600966916 /* Main.storyboard */,
 				4A6087341D8C68F600966916 /* Assets.xcassets */,
+				4A60874D1D8DAC5400966916 /* electric-guitar.png */,
+				4A60874E1D8DAC5400966916 /* guitar.png */,
+				4A60874F1D8DAC5400966916 /* metronome.png */,
+				4A6087501D8DAC5400966916 /* piano.png */,
+				4A6087511D8DAC5400966916 /* keyboard.png */,
+				4A6087521D8DAC5400966916 /* drum.png */,
 				4A6087361D8C68F600966916 /* LaunchScreen.storyboard */,
 				4A6087391D8C68F600966916 /* Info.plist */,
 				4A6087311D8C68F600966916 /* TwoCans2.xcdatamodeld */,
 			);
 			path = TwoCans2;
+			sourceTree = "<group>";
+		};
+		BBA563E50290D525B955B205 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FE372E8390E2A5A32DE626F4 /* Pods-TwoCans2.debug.xcconfig */,
+				37E6911D9F26DC60055968F4 /* Pods-TwoCans2.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +125,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A60873C1D8C68F600966916 /* Build configuration list for PBXNativeTarget "TwoCans2" */;
 			buildPhases = (
+				0095F5EA2E7BD8AB93B1A987 /* 📦 Check Pods Manifest.lock */,
 				4A6087231D8C68F600966916 /* Sources */,
 				4A6087241D8C68F600966916 /* Frameworks */,
 				4A6087251D8C68F600966916 /* Resources */,
+				5DB9108612FE0A90F94CC7F2 /* 📦 Embed Pods Frameworks */,
+				76DD9AE70C9C8DF30BD6E39D /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,20 +180,77 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A6087381D8C68F600966916 /* LaunchScreen.storyboard in Resources */,
+				4A6087581D8DAC5400966916 /* drum.png in Resources */,
+				4A6087401D8C698A00966916 /* GoogleService-Info.plist in Resources */,
 				4A6087351D8C68F600966916 /* Assets.xcassets in Resources */,
+				4A6087561D8DAC5400966916 /* piano.png in Resources */,
+				4A6087551D8DAC5400966916 /* metronome.png in Resources */,
 				4A6087301D8C68F600966916 /* Main.storyboard in Resources */,
+				4A6087531D8DAC5400966916 /* electric-guitar.png in Resources */,
+				4A6087541D8DAC5400966916 /* guitar.png in Resources */,
+				4A6087571D8DAC5400966916 /* keyboard.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0095F5EA2E7BD8AB93B1A987 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5DB9108612FE0A90F94CC7F2 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TwoCans2/Pods-TwoCans2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76DD9AE70C9C8DF30BD6E39D /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TwoCans2/Pods-TwoCans2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A6087231D8C68F600966916 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A60872D1D8C68F600966916 /* ViewController.swift in Sources */,
+				4A6087421D8C6F0100966916 /* LoginViewController.swift in Sources */,
+				4A6087461D8C707E00966916 /* AppState.swift in Sources */,
 				4A6087331D8C68F600966916 /* TwoCans2.xcdatamodeld in Sources */,
+				4A6087441D8C705000966916 /* ChatViewController.swift in Sources */,
 				4A60872B1D8C68F600966916 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +364,7 @@
 		};
 		4A60873D1D8C68F600966916 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE372E8390E2A5A32DE626F4 /* Pods-TwoCans2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TwoCans2/Info.plist;
@@ -264,6 +376,7 @@
 		};
 		4A60873E1D8C68F600966916 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37E6911D9F26DC60055968F4 /* Pods-TwoCans2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TwoCans2/Info.plist;
@@ -292,6 +405,7 @@
 				4A60873E1D8C68F600966916 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
