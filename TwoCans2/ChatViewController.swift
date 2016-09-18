@@ -9,7 +9,12 @@
 import UIKit
 import Firebase
 
-class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
+//protocol LoginViewControllerDelegate
+//{
+//    func didSetSessionID(sessionIDFromLogin: String?)
+//}
+
+class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate//, LoginViewControllerDelegate
 {
     
     
@@ -36,6 +41,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var iconLabel: UILabel!
     var caMoveIcons = false
     
+    //var uniqueSessionID: String = "a"
     
     
     var ref: FIRDatabaseReference!
@@ -106,10 +112,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // When messages are added, run the withBlock
     
+//    func getSessionIDFirst()
+//    {
+//        uniqueSessionID =
+//    }
+    
     func configureDatabase()
     {
         ref = FIRDatabase.database().reference()
         // Listen for new messages from Firebase
+      //  refHandle = ref.child(uniqueSessionID).observeEventType(.ChildAdded, withBlock: {
         refHandle = ref.child("messages").observeEventType(.ChildAdded, withBlock: {
             (snapshot) -> Void in
             self.messages.append(snapshot)
@@ -146,6 +158,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         {
             cell.textLabel?.text = name + ": " + text
         }
+        
         
         return cell
     }
@@ -240,7 +253,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
+       // if textField == chatTextField
+       // {
         sendMessage(textField.text)
+       // }
+//        else if textField == sessionIDTextfield
+//        {
+//            uniqueSessionID = sessionIDTextfield.text!
+//            configureDatabase()
+//            tableview.reloadData()
+//        }
         
         return false
     }
@@ -255,6 +277,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let messageData = ["text": msg, "name": username]
                     
                     //Push to Firebase Database
+                   // ref.child(uniqueSessionID).childByAutoId().setValue(messageData)
                     ref.child("messages").childByAutoId().setValue(messageData)
                     chatTextField.text = ""
                 }
@@ -332,6 +355,14 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         chatTextField.text = chatTextField.text! + name
     }
+    
+//    func didSetSessionID(sessionIDFromLogin: String?)
+//    {
+//        if let sessIDFrmLog = sessionIDFromLogin
+//        {
+//            uniqueSessionID = sessIDFrmLog
+//        }
+//    }
     
     
     

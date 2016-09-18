@@ -15,8 +15,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var sessionIDtextfield: UITextField!
     
     @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
+    
+   
+    
+ //   var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad()
     {
@@ -134,14 +139,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate
             {
                 passwordTextField.becomeFirstResponder()
             }
-        } else if textField == passwordTextField && passwordTextField.text?.characters.count>0
+        }
+        else if textField == passwordTextField && passwordTextField.text?.characters.count>0
         {
-            passwordTextField.resignFirstResponder()
-            if emailTextField.text?.characters.count == 0
+            emailTextField.resignFirstResponder()
+            if sessionIDtextfield.text?.characters.count == 0
             {
                 emailTextField.becomeFirstResponder()
             }
         }
+//        else if textField == sessionIDtextfield && sessionIDtextfield.text?.characters.count>0
+//        {
+//            delegate!.didSetSessionID(sessionIDtextfield.text!)
+//           // setSessionIDName(sessionIDtextfield.text!)
+//            sessionIDtextfield.resignFirstResponder()
+//        }
         return false
     }
     
@@ -157,6 +169,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     {
         toolbarBottomConstraint.constant = 0.0
     }
+    
+
     
     
     
