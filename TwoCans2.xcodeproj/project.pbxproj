@@ -26,6 +26,8 @@
 		4A60875E1D8DB01C00966916 /* Hand Left-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60875A1D8DB01C00966916 /* Hand Left-48.png */; };
 		4A60875F1D8DB01C00966916 /* Hand Right-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60875B1D8DB01C00966916 /* Hand Right-48.png */; };
 		4A6087601D8DB01C00966916 /* Hand Up-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A60875C1D8DB01C00966916 /* Hand Up-48.png */; };
+		4A6087631D8F17AD00966916 /* stageOverhead.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6087621D8F17AD00966916 /* stageOverhead.png */; };
+		4A6087A21D907CBD00966916 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6087A11D907CBC00966916 /* Message.swift */; };
 		A26643D2D7DE5F29C9E315EE /* Pods_TwoCans2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3FC00B08CD60FC5C75A452 /* Pods_TwoCans2.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		4A60875A1D8DB01C00966916 /* Hand Left-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hand Left-48.png"; sourceTree = "<group>"; };
 		4A60875B1D8DB01C00966916 /* Hand Right-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hand Right-48.png"; sourceTree = "<group>"; };
 		4A60875C1D8DB01C00966916 /* Hand Up-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hand Up-48.png"; sourceTree = "<group>"; };
+		4A6087621D8F17AD00966916 /* stageOverhead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stageOverhead.png; sourceTree = "<group>"; };
+		4A6087A11D907CBC00966916 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CE3FC00B08CD60FC5C75A452 /* Pods_TwoCans2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwoCans2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE372E8390E2A5A32DE626F4 /* Pods-TwoCans2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoCans2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwoCans2/Pods-TwoCans2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +104,7 @@
 			children = (
 				4A60872A1D8C68F600966916 /* AppDelegate.swift */,
 				4A6087451D8C707E00966916 /* AppState.swift */,
+				4A6087A11D907CBC00966916 /* Message.swift */,
 				4A6087431D8C705000966916 /* ChatViewController.swift */,
 				4A6087411D8C6F0100966916 /* LoginViewController.swift */,
 				4A60872E1D8C68F600966916 /* Main.storyboard */,
@@ -109,6 +114,7 @@
 				4A60875B1D8DB01C00966916 /* Hand Right-48.png */,
 				4A60875C1D8DB01C00966916 /* Hand Up-48.png */,
 				4A60874D1D8DAC5400966916 /* electric-guitar.png */,
+				4A6087621D8F17AD00966916 /* stageOverhead.png */,
 				4A60874E1D8DAC5400966916 /* guitar.png */,
 				4A60874F1D8DAC5400966916 /* metronome.png */,
 				4A6087501D8DAC5400966916 /* piano.png */,
@@ -200,6 +206,7 @@
 				4A6087551D8DAC5400966916 /* metronome.png in Resources */,
 				4A60875E1D8DB01C00966916 /* Hand Left-48.png in Resources */,
 				4A6087301D8C68F600966916 /* Main.storyboard in Resources */,
+				4A6087631D8F17AD00966916 /* stageOverhead.png in Resources */,
 				4A6087601D8DB01C00966916 /* Hand Up-48.png in Resources */,
 				4A6087531D8DAC5400966916 /* electric-guitar.png in Resources */,
 				4A60875F1D8DB01C00966916 /* Hand Right-48.png in Resources */,
@@ -267,6 +274,7 @@
 				4A6087421D8C6F0100966916 /* LoginViewController.swift in Sources */,
 				4A6087461D8C707E00966916 /* AppState.swift in Sources */,
 				4A6087331D8C68F600966916 /* TwoCans2.xcdatamodeld in Sources */,
+				4A6087A21D907CBD00966916 /* Message.swift in Sources */,
 				4A6087441D8C705000966916 /* ChatViewController.swift in Sources */,
 				4A60872B1D8C68F600966916 /* AppDelegate.swift in Sources */,
 			);

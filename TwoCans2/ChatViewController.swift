@@ -17,14 +17,19 @@ import Firebase
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate//, LoginViewControllerDelegate
 {
     
+    //var location = CGPoint(x: 0, y: 0)
+     var start: CGPoint?
+    var newCenter: CGPoint?
     
     
     @IBOutlet weak var chatTextField: UITextField!
     
+    @IBOutlet weak var unlockLabel: UIButton!
     
     @IBOutlet weak var tableview: UITableView!
     
     
+    @IBOutlet weak var handLeftButton: UIButton!
     @IBOutlet weak var drums: UIImageView!
     @IBOutlet weak var elecGuitar: UIImageView!
     @IBOutlet weak var keys: UIImageView!
@@ -39,7 +44,9 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
      @IBOutlet weak var singleTapRecognizer: UITapGestureRecognizer!
     
     @IBOutlet weak var iconLabel: UILabel!
-    var caMoveIcons = false
+    var canMoveIcons = false
+    
+    var handRightButton = UIButton()
     
     //var uniqueSessionID: String = "a"
     
@@ -55,7 +62,13 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
     {
         super.viewDidLoad()
+      //  handRightButton.frame.size. (x: 50, y: 50, width: 68, height: 68)
+        
+        handRightButton.imageView?.image = UIImage(named: "Hand Right-48.png")
+        view.addSubview(handRightButton)
+        
         configureDatabase()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDidShow), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         
@@ -72,28 +85,41 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             performSegueWithIdentifier("ModalLoginSegue", sender: self)
         }
         
-//        // 1
-//        ref.observeEventType(.Value, withBlock: { snapshot in
-            
-            
-            
-//            self.tableview.reloadData()
-//           })
-//            // 2
-//            var newItems = [GroceryItem]()
-//            
-//            // 3
-//            for item in snapshot.children {
-//                
-//                // 4
-//                let groceryItem = GroceryItem(snapshot: item as! FDataSnapshot)
-//                newItems.append(groceryItem)
+//        ref = FIRDatabase.database().reference()
+//        ref.child("messages").observeEventType(.Value, withBlock: {
+//            (snapshot) -> Void in
+//            var newMessages = self.messages
+//            self.messages = []
+//            for item in newMessages
+//            {
+//                let aMessage = item
+//           self.messages.append(aMessage)
 //            }
+//            self.tableview.reloadData()
+//        })
+    
+//        override func viewDidAppear(animated: Bool) {
+//            super.viewDidAppear(animated)
 //            
-//            // 5
-//            self.items = newItems
-            //tableView.reloadData()
-        
+//            // 1
+//            ref.observeEventType(.Value, withBlock: { snapshot in
+//                
+//                // 2
+//                var newItems = [GroceryItem]()
+//                
+//                // 3
+//                for item in snapshot.children {
+//                    
+//                    // 4
+//                    let groceryItem = GroceryItem(snapshot: item as! FDataSnapshot)
+//                    newItems.append(groceryItem)
+//                }
+//                
+//                // 5
+//                self.items = newItems
+//                self.tableView.reloadData()
+//            })
+//        }
     }
     
     override func didReceiveMemoryWarning()
@@ -107,21 +133,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    
-    // MARK: - Firebase methods
-    
-    // When messages are added, run the withBlock
-    
-//    func getSessionIDFirst()
-//    {
-//        uniqueSessionID =
-//    }
-    
     func configureDatabase()
     {
         ref = FIRDatabase.database().reference()
         // Listen for new messages from Firebase
-      //  refHandle = ref.child(uniqueSessionID).observeEventType(.ChildAdded, withBlock: {
+        //  refHandle = ref.child(uniqueSessionID).observeEventType(.ChildAdded, withBlock: {
         refHandle = ref.child("messages").observeEventType(.ChildAdded, withBlock: {
             (snapshot) -> Void in
             self.messages.append(snapshot)
@@ -131,9 +147,79 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.tableview.insertRowsAtIndexPaths([NSIndexPath(forRow: self.messages.count-1, inSection: 0)], withRowAnimation: .Automatic)
             
         })
-        messageRefHandles.append(refHandle)
+        refHandle = ref.child("messages").observeEventType(.ChildRemoved, withBlock: {
+            (snapshot) -> Void in
+            
+            var foundMessage: FIRDataSnapshot?
+            for aMessage in self.messages
+            {
+                if aMessage.key == snapshot.key
+                {
+                    foundMessage = aMessage
+                    print("found this snapshot")
+                    break
+                }
+
+            }
+            
+            if let index = self.messages.indexOf(foundMessage!)
+            {
+                print("gonna remove it!!")
+                self.messages.removeAtIndex(index)
+                self.tableview.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+                self.tableview.reloadData()
+            }
+
+            
+        })
+        
+        refHandle = ref.child("messages").observeEventType(.ChildChanged, withBlock: {
+            (snapshot) -> Void in
+            if let index = self.messages.indexOf(snapshot)
+            {
+                //self.messages.insert(snapshot, atIndex: index)
+                //self.messages.removeAtIndex(index + 1)
+                self.tableview.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+                //   deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+            }
+            
+        })
+        
+        
+        //  messageRefHandles.append(refHandle)
         
     }
+    
+    func sendMessage(message: String?)
+    {
+        let completed: Bool = false
+        let removeRequest: Bool = false
+        if let msg = message{
+            if msg.characters.count > 0
+                
+                /*
+                 gameRefID = ref.child("games").childByAutoId()
+                 gameRefID.setValue(dataToSend())
+                 
+                 let name: String
+                 let request: String
+                 let completed: Bool
+                 let removeRequest: Bool?
+                 */
+            {
+                if let username = AppState.sharedInstance.displayName
+                {
+                    let messageData = ["text": msg, "name": username, "completed": completed, "removeRequest": removeRequest]
+                    
+                    //Push to Firebase Database
+                    // ref.child(uniqueSessionID).childByAutoId().setValue(messageData)
+                    ref.child("messages").childByAutoId().setValue(messageData)
+                    chatTextField.text = ""
+                }
+            }
+        }
+    }
+
     
     // MARK: - Tableview required methods
     
@@ -152,16 +238,183 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Unpack message from Firebase DataSnapshot
         
         let messageSnapshot = self.messages[indexPath.row]
-        let message = messageSnapshot.value as! Dictionary<String, String>
-        if let name = message["name"], let text = message["text"]
+        let message = messageSnapshot.value as! Dictionary<String, AnyObject>
+        if let name = message["name"], let text = message["text"], let completed = message["completed"], let removeRequest = message["removeRequest"]
             
         {
-            cell.textLabel?.text = name + ": " + text
+            //cell.textLabel?.text = name + ": " + text
+            cell.textLabel?.text = text as? String
+            
+            let fontSized = cell.textLabel?.text?.characters.count
+            let tempSize  = CGFloat(40 - fontSized!)
+            cell.textLabel?.font = UIFont(name: "Thonburi", size: tempSize)
+            
+            //            if completed as! Bool == false
+            //            {
+            //                cell.accessoryType = UITableViewCellAccessoryType.None
+            //                cell.textLabel?.textColor = UIColor.blackColor()
+            //                cell.detailTextLabel?.textColor = UIColor.blackColor()
+            //            } else {
+            //
+            //                cell.accessoryView?.tintColor = UIColor.greenColor()
+            //                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            //
+            //                cell.textLabel?.textColor = UIColor.greenColor()
+            //                cell.detailTextLabel?.textColor = UIColor.greenColor()
+            //            }
+            
         }
+        
         
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // 1
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        
+        let snapshotToUpdate = messages[indexPath.row]
+        var updatedMessage = snapshotToUpdate.value as! Dictionary<String, AnyObject>
+        // updatedMessage = ["completed": true]
+        // snapshotToUpdate.ref.updateChildValues(updatedMessage)
+        
+        //snapshotToUpdate.ref.removeValue()
+        
+        //    let messageSnapshot = self.messages[indexPath.row]
+        //    let message = messageSnapshot.value as! Dictionary<String, String>
+        
+        //    refToDelete.ref.updateChildValues(message)
+        
+        toggledCompletion = !toggledCompletion
+        let tempBool = toggledCompletion
+        updatedMessage = ["completed": tempBool]
+        snapshotToUpdate.ref.updateChildValues(updatedMessage)
+        
+        toggleCellCheckbox(cell, isCompleted: toggledCompletion)
+        
+        tableView.reloadData()
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == .Delete
+        {
+            let refToDelete = messages[indexPath.row]
+            refToDelete.ref.removeValue()
+            
+            //            let messageSnapshot = self.messages[indexPath.row]
+            //            let message = messageSnapshot.value as! Dictionary<String, String>
+            //            refToDelete.ref.updateChildValues(message)
+            // messages.removeAtIndex(indexPath.row)
+            // tableView.reloadData()
+        }
+        //   tableView.reloadData()
+    }
+    
+    func toggleCellCheckbox(cell: UITableViewCell, isCompleted: Bool)
+    {
+        if !isCompleted {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.textLabel?.textColor = UIColor.blackColor()
+            cell.detailTextLabel?.textColor = UIColor.blackColor()
+        } else {
+            
+            cell.accessoryView?.tintColor = UIColor.greenColor()
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            
+            cell.textLabel?.textColor = UIColor.greenColor()
+            cell.detailTextLabel?.textColor = UIColor.greenColor()
+        }
+    }
+    
+
+
+
+
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        super.touchesBegan(touches, withEvent: event)
+        let touch = touches.first
+      
+        start = touch!.locationInView(self.view)
+       
+        //location = touch.locationInView(self.view)
+        handLeftButton.center = start!
+        
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        super.touchesMoved(touches, withEvent: event)
+        let touch = touches.first
+        let end = touch!.locationInView(view)
+      //  if let start = self.start
+      //  {
+            handLeftButton.center = end
+      //  }
+      //  self.start = end
+       // elecGuitar.center = location
+        
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        super.touchesEnded(touches, withEvent: event)
+        let touch = touches.first
+        let end = touch!.locationInView(view)
+        newCenter = end
+        handLeftButton.center = newCenter!
+        print(newCenter)
+    }
+    
+    func makeImage() -> UIImage
+    {
+        
+        
+        UIGraphicsBeginImageContext(self.piano.bounds.size)//  .bounds.size)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let viewImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return viewImage
+    }
+    
+    
+    //      let imageToConvert = UIImage(named: "piano")
+    //      let imageAsData = UIImagePNGRepresentation(imageToConvert!)
+    
+    // print("the piano data is: \(imageAsData!)")
+    //myData = myImageData!
+    
+    //let myNewImage : UIImage = UIImage(data: imageAsData!)!
+    
+    //let aString: String = imageAsData.
+    
+    //        let textViewData : NSData = imageData.dataUsingEncodin(NSNonLossyASCIIStringEncoding)!
+    //        let valueUniCode : String = String(data: textViewData, encoding: NSUTF8StringEncoding)!
+    //        let emojData : NSData = valueUniCode.dataUsingEncoding(NSUTF8StringEncoding)!
+    //        let emojString:String = String(data: emojData, encoding: NSNonLossyASCIIStringEncoding)!
+    
+
+    
+    
+    // MARK: - Firebase methods
+    
+    // When messages are added, run the withBlock
+    
+//    func getSessionIDFirst()
+//    {
+//        uniqueSessionID =
+//    }
+    
+    
     
     
     
@@ -189,101 +442,21 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //    }
     
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-    {
-     //   let messageToDelete = messages[indexPath.row]
-//        if messages.count > 1
-//        {
-//        tableView.reloadData()
-//        }
-        return true
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
-    {
-        if editingStyle == .Delete
-        {
-            let refToDelete = messages[indexPath.row]
-            refToDelete.ref.removeValue()
-            
-         //  ref.child("messages").removeValue()
-            
-          //  messageRefID = ref.child("messages").childByAutoId()
-            messages.removeAtIndex(indexPath.row)
-         //  self.messageRefHandles.removeAtIndex(indexPath.row)
-        }
-        tableView.reloadData()
-    }
-    
-    func toggleCellCheckbox(cell: UITableViewCell, isCompleted: Bool) {
-        if !isCompleted {
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            cell.textLabel?.textColor = UIColor.blackColor()
-            cell.detailTextLabel?.textColor = UIColor.blackColor()
-        } else {
-            
-            cell.accessoryView?.tintColor = UIColor.greenColor()
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-            
-            cell.textLabel?.textColor = UIColor.greenColor()
-            cell.detailTextLabel?.textColor = UIColor.greenColor()
-        }
-    }
     
     
-    
-       func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // 1
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
-        // 2
-      //  var message = messages[indexPath.row]
-        // 3
-        
-        toggledCompletion = !toggledCompletion
-        // 4
-        toggleCellCheckbox(cell, isCompleted: toggledCompletion)
-        // 5
-//        groceryItem.ref?.updateChildValues([
-//            "completed": toggledCompletion
-//            ])
-        tableView.reloadData()
-    }
     
     // MARK: - Textfield delegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
-       // if textField == chatTextField
-       // {
+        
+
         sendMessage(textField.text)
-       // }
-//        else if textField == sessionIDTextfield
-//        {
-//            uniqueSessionID = sessionIDTextfield.text!
-//            configureDatabase()
-//            tableview.reloadData()
-//        }
+
         
         return false
     }
     
-    func sendMessage(message: String?)
-    {
-        if let msg = message{
-            if msg.characters.count > 0
-            {
-                if let username = AppState.sharedInstance.displayName
-                {
-                    let messageData = ["text": msg, "name": username]
-                    
-                    //Push to Firebase Database
-                   // ref.child(uniqueSessionID).childByAutoId().setValue(messageData)
-                    ref.child("messages").childByAutoId().setValue(messageData)
-                    chatTextField.text = ""
-                }
-            }
-        }
-    }
     
     
     @IBAction func signOut(sender: UIBarButtonItem)
@@ -307,10 +480,21 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    @IBAction func hideTapped(sender: UIButton) {
+    
+    @IBAction func hideTapped(sender: UIButton)
+    {
         
-        caMoveIcons = !caMoveIcons
-        
+        canMoveIcons = !canMoveIcons
+        if canMoveIcons
+        {
+            unlockLabel.setTitle("Icons Unlocked", forState: .Normal)
+            unlockLabel.setTitleColor(UIColor.redColor(), forState: .Normal)
+        }
+        else
+        {
+            unlockLabel.setTitle("Icons Locked", forState: .Normal)
+            unlockLabel.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        }
 //        if chatTextField.isFirstResponder()
 //        {
 //            chatTextField.resignFirstResponder()
@@ -339,13 +523,13 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func handlePan(recognizer:UIPanGestureRecognizer)
     {
-        if caMoveIcons
+        if canMoveIcons
         {
         let translation = recognizer.translationInView(self.view)
         if let view = recognizer.view {
             view.center = CGPoint(x:view.center.x + translation.x,
                                   y:view.center.y + translation.y)
-        }
+            }
         recognizer.setTranslation(CGPointZero, inView: self.view)
         }
         
@@ -356,6 +540,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         chatTextField.text = chatTextField.text! + name
     }
     
+    @IBAction func requestTapped(sender: UIButton)
+    {
+        chatTextField.text = chatTextField.text! + sender.currentTitle!
+        
+    }
 //    func didSetSessionID(sessionIDFromLogin: String?)
 //    {
 //        if let sessIDFrmLog = sessionIDFromLogin
