@@ -54,6 +54,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var ref: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle!
     var messages = Array<FIRDataSnapshot>()
+    var arrayOfMessages = [Message]()
      var messageRefHandles = Array<FIRDatabaseHandle>()
     var toggledCompletion = false
     
@@ -85,41 +86,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             performSegueWithIdentifier("ModalLoginSegue", sender: self)
         }
         
-//        ref = FIRDatabase.database().reference()
-//        ref.child("messages").observeEventType(.Value, withBlock: {
-//            (snapshot) -> Void in
-//            var newMessages = self.messages
-//            self.messages = []
-//            for item in newMessages
-//            {
-//                let aMessage = item
-//           self.messages.append(aMessage)
-//            }
-//            self.tableview.reloadData()
-//        })
-    
-//        override func viewDidAppear(animated: Bool) {
-//            super.viewDidAppear(animated)
-//            
-//            // 1
-//            ref.observeEventType(.Value, withBlock: { snapshot in
-//                
-//                // 2
-//                var newItems = [GroceryItem]()
-//                
-//                // 3
-//                for item in snapshot.children {
-//                    
-//                    // 4
-//                    let groceryItem = GroceryItem(snapshot: item as! FDataSnapshot)
-//                    newItems.append(groceryItem)
-//                }
-//                
-//                // 5
-//                self.items = newItems
-//                self.tableView.reloadData()
-//            })
-//        }
     }
     
     override func didReceiveMemoryWarning()
@@ -133,6 +99,34 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+//    func convertMessageToSnapshot(aMsg: Message) -> [String: AnyObject]
+//    {
+//        
+//        let name = aMsg.name
+//        let request = aMsg.request
+//        let completed = aMsg.completed
+//        let removeRequest = aMsg.removeRequest
+//        
+//        let messageData = ["name": name, "text": request, "completed": completed, "removeRequest": removeRequest]
+//        
+//        return messageData as! [String : AnyObject]
+//        
+//    }
+    
+    func convertSnapshotToMessage(aSnap: FIRDataSnapshot) -> Message
+    {
+        let aMessage = Message()
+        let message = aSnap.value as! Dictionary<String, AnyObject>
+        if let name = message["name"], let request = message["text"], let completed = message["completed"], let removeRequest = message["removeRequest"]
+        {
+            aMessage.name = name as! String
+            aMessage.request = request as! String
+            aMessage.completed = completed as! Bool
+            aMessage.removeRequest = removeRequest as! Bool
+        }
+        return aMessage
+    }
+    
     func configureDatabase()
     {
         ref = FIRDatabase.database().reference()
@@ -142,8 +136,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             (snapshot) -> Void in
             self.messages.append(snapshot)
             
-            //self.messages.insert(snapshot, atIndex: 0)
-            // self.tableview.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
+     //       self.arrayOfMessages.append(snapshot) as! [String: AnyObject] ****> FIGURE THIS OUT!!!!!!
+            
             self.tableview.insertRowsAtIndexPaths([NSIndexPath(forRow: self.messages.count-1, inSection: 0)], withRowAnimation: .Automatic)
             
         })
@@ -161,7 +155,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }
 
             }
-            
+
             if let index = self.messages.indexOf(foundMessage!)
             {
                 print("gonna remove it!!")
@@ -175,13 +169,39 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         refHandle = ref.child("messages").observeEventType(.ChildChanged, withBlock: {
             (snapshot) -> Void in
-            if let index = self.messages.indexOf(snapshot)
+            
+            var foundMessage: FIRDataSnapshot?
+            for aMessage in self.messages
             {
-                //self.messages.insert(snapshot, atIndex: index)
-                //self.messages.removeAtIndex(index + 1)
-                self.tableview.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
-                //   deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+                if aMessage.key == snapshot.key
+                {
+                    foundMessage = aMessage
+                    print("found this snapshot")
+                    break
+                }
+                
             }
+            
+            if let index = self.messages.indexOf(foundMessage!)
+            {
+                print("Make it green!!")
+                
+              //  self.messages.insert(foundMessage!, atIndex: index)
+              //  self.messages.removeAtIndex(index + 1)
+                
+              //  self.messages.removeAtIndex(index)
+                self.tableview.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+               // self.tableview.reloadData()
+            }
+
+            
+//            if let index = self.messages.indexOf(snapshot)
+//            {
+//                //self.messages.insert(snapshot, atIndex: index)
+//                //self.messages.removeAtIndex(index + 1)
+//                self.tableview.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+//                //   deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+//            }
             
         })
         
@@ -194,7 +214,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         let completed: Bool = false
         let removeRequest: Bool = false
-        if let msg = message{
+        if let msg = message
+        {
             if msg.characters.count > 0
                 
                 /*
@@ -237,11 +258,39 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // Unpack message from Firebase DataSnapshot
         
+       // var aRequest: Message
+        
         let messageSnapshot = self.messages[indexPath.row]
+        
+        let aRequest = convertSnapshotToMessage(messageSnapshot)
+        
+/*
         let message = messageSnapshot.value as! Dictionary<String, AnyObject>
         if let name = message["name"], let text = message["text"], let completed = message["completed"], let removeRequest = message["removeRequest"]
             
         {
+*/
+        cell.textLabel?.text = aRequest.request
+        if aRequest.completed
+        {
+            cell.textLabel?.textColor = UIColor.greenColor()
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell.accessoryView?.tintColor = UIColor.greenColor()
+            
+        }
+        else
+        {
+            cell.textLabel?.textColor = UIColor.blackColor()
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        }
+        
+        let fontSized = cell.textLabel?.text?.characters.count
+        let tempSize  = CGFloat(40 - fontSized!)
+        cell.textLabel?.font = UIFont(name: "Thonburi", size: tempSize)
+        
+            
+/*
+            
             //cell.textLabel?.text = name + ": " + text
             cell.textLabel?.text = text as? String
             
@@ -262,10 +311,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //                cell.textLabel?.textColor = UIColor.greenColor()
             //                cell.detailTextLabel?.textColor = UIColor.greenColor()
             //            }
-            
+ 
+        
         }
-        
-        
+*/
+
         
         return cell
     }
@@ -274,8 +324,31 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // 1
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
         
+      //  var aRequest: Message
         let snapshotToUpdate = messages[indexPath.row]
+        
+    //    aRequest = convertSnapshotToMessage(snapshotToUpdate)
+    //    aRequest.completed = !aRequest.completed
+        
         var updatedMessage = snapshotToUpdate.value as! Dictionary<String, AnyObject>
+        
+//        if aRequest.completed
+//        {
+//            cell.textLabel?.textColor = UIColor.greenColor()
+//            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+//            cell.accessoryView?.tintColor = UIColor.greenColor()
+//            
+//        }
+//        else
+//        {
+//            cell.textLabel?.textColor = UIColor.blackColor()
+//            cell.accessoryType = UITableViewCellAccessoryType.None
+//        }
+        
+      //  let updatedRequest = Message.convertMessageToSnapshot(aRequest) as! Dictionary<String, AnyObject>
+       // aRequest.convertMessageToSnapshot(aMsg: Message)
+
+        
         // updatedMessage = ["completed": true]
         // snapshotToUpdate.ref.updateChildValues(updatedMessage)
         
@@ -293,7 +366,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         toggleCellCheckbox(cell, isCompleted: toggledCompletion)
         
-        tableView.reloadData()
+      //  tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
@@ -318,17 +391,21 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //   tableView.reloadData()
     }
     
+    
+   
+
     func toggleCellCheckbox(cell: UITableViewCell, isCompleted: Bool)
     {
         if !isCompleted {
             cell.accessoryType = UITableViewCellAccessoryType.None
             cell.textLabel?.textColor = UIColor.blackColor()
             cell.detailTextLabel?.textColor = UIColor.blackColor()
-        } else {
+        }
+        else
+        {
             
             cell.accessoryView?.tintColor = UIColor.greenColor()
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-            
             cell.textLabel?.textColor = UIColor.greenColor()
             cell.detailTextLabel?.textColor = UIColor.greenColor()
         }
